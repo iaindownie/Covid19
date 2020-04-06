@@ -160,12 +160,12 @@ public class MainActivity extends AppCompatActivity {
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
+                        Log.d("INFO",response.toString());
 
                         try {
                             countryItemList.clear();
                             JSONArray countries = response.getJSONArray("Countries");
                             String update = response.getString("Date");
-                            update = update.substring(0, update.indexOf("."));
 
                             SimpleDateFormat sdf = new SimpleDateFormat("dd MMM h:mma", Locale.getDefault());
                             final DateFormat fmt;
@@ -190,10 +190,10 @@ public class MainActivity extends AppCompatActivity {
                                         o.getInt("NewRecovered"),
                                         o.getInt("TotalRecovered")
                                 );
-
-                                if (aCountry.Country.length() > 0 && !aCountry.Country.startsWith("Iran (")) {
-                                    countryItemList.add(aCountry);
-                                }
+                                countryItemList.add(aCountry);
+//                                if (aCountry.Country.length() > 0 && !aCountry.Country.startsWith("Iran (")) {
+//                                    countryItemList.add(aCountry);
+//                                }
                             }
                         } catch (JSONException | ParseException e) {
                             e.printStackTrace();
