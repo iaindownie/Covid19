@@ -183,7 +183,7 @@ public class MainActivity extends AppCompatActivity {
                                 JSONObject o = countries.getJSONObject(i);
                                 CountryItem aCountry = new CountryItem(
                                         o.getString("Country"),
-                                        o.optString("CountrySlug", ""),
+                                        o.optString("Slug", ""),
                                         o.getInt("NewConfirmed"),
                                         o.getInt("TotalConfirmed"),
                                         o.getInt("NewDeaths"),
