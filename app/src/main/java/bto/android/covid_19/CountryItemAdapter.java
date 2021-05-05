@@ -59,7 +59,7 @@ public class CountryItemAdapter extends RecyclerView.Adapter<CountryItemAdapter.
         holder.countryName.setText(country.getCountry());
         holder.totalCases.setText(String.valueOf(country.TotalConfirmed));
         holder.totalDeaths.setText(String.valueOf(country.TotalDeaths));
-        holder.newDeaths.setText(String.format("+%d", country.NewDeaths));
+        holder.newDeaths.setText(String.format("+%d", country.NewConfirmed));
     }
 
     @Override
