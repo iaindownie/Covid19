@@ -3,7 +3,6 @@ package bto.android.covid_19;
 import android.app.ProgressDialog;
 import android.app.SearchManager;
 import android.content.Context;
-import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,7 +10,6 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Cache;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
@@ -21,7 +19,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.UnsupportedEncodingException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -220,31 +217,31 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void volleyCacheRequest(String url) {
-        Cache cache = AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache();
-        Cache.Entry entry = cache.get(url);
-        if (entry != null) {
-            try {
-                String data = new String(entry.data, "UTF-8");
-                // handle data, like converting it to xml, json, bitmap etc.,
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
-        } else {
-
-        }
-    }
-
-    public void volleyInvalidateCache(String url) {
-        AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().invalidate(url, true);
-    }
-
-    public void volleyDeleteCache(String url) {
-        AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().remove(url);
-    }
-
-    public void volleyClearCache() {
-        AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().clear();
-    }
+//    public void volleyCacheRequest(String url) {
+//        Cache cache = AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache();
+//        Cache.Entry entry = cache.get(url);
+//        if (entry != null) {
+//            try {
+//                String data = new String(entry.data, "UTF-8");
+//                // handle data, like converting it to xml, json, bitmap etc.,
+//            } catch (UnsupportedEncodingException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+//
+//        }
+//    }
+//
+//    public void volleyInvalidateCache(String url) {
+//        AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().invalidate(url, true);
+//    }
+//
+//    public void volleyDeleteCache(String url) {
+//        AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().remove(url);
+//    }
+//
+//    public void volleyClearCache() {
+//        AppSingleton.getInstance(getApplicationContext()).getRequestQueue().getCache().clear();
+//    }
 
 }

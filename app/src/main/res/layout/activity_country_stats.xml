@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CountryStats">
 
-    <com.fdev.backgroundchart.GradientChart
-        android:id="@+id/gradientChart"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:plusColorStart="#2196F3"
-        app:plusColorEnd="#90CAF9"
-        app:minusColorStart="#90CAF9"
-        app:minusColorEnd="#90CAF9"
-        app:zoom="10"
-        app:isBezier="true"/>
+    <org.eazegraph.lib.charts.ValueLineChart
+        android:id="@+id/cubiclinechart"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:egCurveSmoothness="0.1"
+        app:egIndicatorLineColor="#FE6DA8"
+        app:egLegendHeight="40dp"
+        app:egShowStandardValue="true"
+        app:egUseCubic="true"
+        app:egUseOverlapFill="true" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>

@@ -2,11 +2,11 @@ package bto.android.covid_19;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,6 +67,9 @@ public class CountryItemAdapter extends RecyclerView.Adapter<CountryItemAdapter.
             public void onClick(View v) {
                 //Toast.makeText(activity, "Country stats coming soon...", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(activity, CountryStats.class);
+                Bundle b = new Bundle();
+                b.putString("COUNTRY_SLUG", country.CountrySlug);
+                intent.putExtra("COUNTRY_DATA", b);
                 activity.startActivity(intent);
             }
         });
