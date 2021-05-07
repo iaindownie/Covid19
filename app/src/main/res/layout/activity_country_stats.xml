@@ -24,10 +24,17 @@
         android:textStyle="bold" />
 
 
-    <com.jjoe64.graphview.GraphView
-        android:id="@+id/graph"
+<!--    <com.jjoe64.graphview.GraphView-->
+<!--        android:id="@+id/graph"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="match_parent"-->
+<!--        android:layout_below="@+id/country_title" />-->
+
+    <lecho.lib.hellocharts.view.LineChartView
+        android:id="@+id/chart"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/country_title" />
+        android:layout_below="@+id/country_title"/>
 
 </RelativeLayout>

@@ -56,4 +56,7 @@ dependencies {
 
     // https://github.com/jjoe64/GraphView
     implementation 'com.jjoe64:graphview:4.2.2'
+
+    // https://github.com/lecho/hellocharts-android
+    implementation 'com.github.lecho:hellocharts-android:v1.5.8'
 }
