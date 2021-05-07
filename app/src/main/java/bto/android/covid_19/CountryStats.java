@@ -3,22 +3,22 @@ package bto.android.covid_19;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.series.DataPoint;
+import com.jjoe64.graphview.series.LineGraphSeries;
 
-import org.eazegraph.lib.charts.ValueLineChart;
-import org.eazegraph.lib.models.ValueLinePoint;
-import org.eazegraph.lib.models.ValueLineSeries;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Locale;
 
@@ -29,10 +29,11 @@ public class CountryStats extends AppCompatActivity {
     private static final String JOHN_HOPKINS_API_BASE_URL = "https://api.covid19api.com/total/country/";
     private static final String TAG = "CountryStats";
     private Bundle bundle;
-    private String countrySlug = "";
+    private String countrySlug, countryTextTitle = "";
 
-    private ValueLineChart mCubicValueLineChart;
-    private ValueLineSeries series;
+    private GraphView graph;
+    private LineGraphSeries<DataPoint> series;
+    private TextView countryTitle;
 
 
     @Override
@@ -44,13 +45,12 @@ public class CountryStats extends AppCompatActivity {
         if (intent != null) {
             bundle = intent.getBundleExtra("COUNTRY_DATA");
             countrySlug = bundle.getString("COUNTRY_SLUG", "united-kingdom");
+            countryTextTitle = bundle.getString("COUNTRY_TITLE", "United Kingdom");
         }
 
-
-        mCubicValueLineChart = (ValueLineChart) findViewById(R.id.cubiclinechart);
-
-        series = new ValueLineSeries();
-        series.setColor(0xFF56B7F1);
+        countryTitle = findViewById(R.id.country_title);
+        countryTitle.setText("Daily new cases: " + countryTextTitle);
+        graph = findViewById(R.id.graph);
 
         volleyJsonArrayRequest(JOHN_HOPKINS_API_BASE_URL + countrySlug + "/status/confirmed");
     }
@@ -59,7 +59,7 @@ public class CountryStats extends AppCompatActivity {
 
         String REQUEST_TAG = "volleyJsonObjectRequest.covid19.countrytotals";
 
-        SimpleDateFormat sdf = new SimpleDateFormat("MM/YY", Locale.getDefault());
+        //SimpleDateFormat sdf = new SimpleDateFormat("MM/YY", Locale.getDefault());
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
                 Request.Method.GET,
@@ -70,8 +70,11 @@ public class CountryStats extends AppCompatActivity {
                     public void onResponse(JSONArray response) {
                         //Log.d("INFO", String.valueOf(response.length()));
 
-                        // Do something with response
-                        DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                        DataPoint[] dataPoints = new DataPoint[response.length()];
+
+                        //DateFormat fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+
+                        int maxY = 0;
 
                         // Process the JSON
                         try {
@@ -80,23 +83,37 @@ public class CountryStats extends AppCompatActivity {
                             // Loop through the array elements
                             for (int i = 0; i < response.length(); i++) {
                                 JSONObject o = response.getJSONObject(i);
-                                String date = o.getString("Date");
+                                //String date = o.getString("Date");
                                 runningTotal = o.getInt("Cases");
                                 daily = runningTotal - tally;
+                                if (daily < 0) daily = 0;
                                 tally = runningTotal;
-                                if (date.endsWith("Z")) {
-                                    fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
-                                }
+                                //if (date.endsWith("Z")) {
+                                //    fmt = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+                                //}
+                                if (daily > maxY) maxY = daily;
                                 //Log.d("INFO", sdf.format(fmt.parse(date)) + " " + runningTotal + " " + daily);
-                                series.addPoint(new ValueLinePoint(sdf.format(fmt.parse(date)), Float.valueOf(daily)));
+                                dataPoints[i] = new DataPoint(i, daily);
                             }
 
-                        } catch (JSONException | ParseException e) {
+                        } catch (JSONException e) {
                             e.printStackTrace();
                         }
 
-                        mCubicValueLineChart.addSeries(series);
-                        mCubicValueLineChart.startAnimation();
+                        series = new LineGraphSeries<DataPoint>(dataPoints);
+                        series.setDrawBackground(true);
+                        series.setColor(R.color.graph_blue);
+                        series.setBackgroundColor(R.color.graph_blue);
+                        graph.addSeries(series);
+
+                        graph.getViewport().setXAxisBoundsManual(true);
+                        graph.getViewport().setMinX(0);
+                        graph.getViewport().setMaxX(response.length() * 1.005);
+
+                        graph.getViewport().setYAxisBoundsManual(true);
+                        graph.getViewport().setMinY(0);
+                        graph.getViewport().setMaxY(maxY * 1.1);
+
                     }
                 },
                 new Response.ErrorListener() {

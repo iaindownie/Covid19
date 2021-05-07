@@ -1,20 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".CountryStats">
 
-    <org.eazegraph.lib.charts.ValueLineChart
-        android:id="@+id/cubiclinechart"
+    <!--    <org.eazegraph.lib.charts.ValueLineChart-->
+    <!--        android:id="@+id/cubiclinechart"-->
+    <!--        android:layout_width="match_parent"-->
+    <!--        android:layout_height="match_parent"-->
+    <!--        app:egCurveSmoothness="0.1"-->
+    <!--        app:egIndicatorLineColor="#FE6DA8"-->
+    <!--        app:egLegendHeight="40dp"-->
+    <!--        app:egShowStandardValue="true"-->
+    <!--        app:egUseCubic="true"-->
+    <!--        app:egUseOverlapFill="true" />-->
+
+    <TextView
+        android:id="@+id/country_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textStyle="bold" />
+
+
+    <com.jjoe64.graphview.GraphView
+        android:id="@+id/graph"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:egCurveSmoothness="0.1"
-        app:egIndicatorLineColor="#FE6DA8"
-        app:egLegendHeight="40dp"
-        app:egShowStandardValue="true"
-        app:egUseCubic="true"
-        app:egUseOverlapFill="true" />
+        android:layout_below="@+id/country_title" />
 
 </RelativeLayout>

@@ -69,6 +69,7 @@ public class CountryItemAdapter extends RecyclerView.Adapter<CountryItemAdapter.
                 Intent intent = new Intent(activity, CountryStats.class);
                 Bundle b = new Bundle();
                 b.putString("COUNTRY_SLUG", country.CountrySlug);
+                b.putString("COUNTRY_TITLE", country.getCountry());
                 intent.putExtra("COUNTRY_DATA", b);
                 activity.startActivity(intent);
             }
