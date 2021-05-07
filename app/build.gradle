@@ -49,14 +49,6 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.0'
     implementation 'androidx.cardview:cardview:1.0.0'
 
-    // Both these libraries are needed for the graphing
-    // https://github.com/blackfizz/EazeGraph
-    //implementation 'com.github.blackfizz:eazegraph:1.2.2@aar'
-    //implementation 'com.nineoldandroids:library:2.4.0'
-
-    // https://github.com/jjoe64/GraphView
-    implementation 'com.jjoe64:graphview:4.2.2'
-
     // https://github.com/lecho/hellocharts-android
     implementation 'com.github.lecho:hellocharts-android:v1.5.8'
 }

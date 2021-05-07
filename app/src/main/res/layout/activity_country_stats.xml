@@ -5,17 +5,6 @@
     android:layout_height="match_parent"
     tools:context=".CountryStats">
 
-    <!--    <org.eazegraph.lib.charts.ValueLineChart-->
-    <!--        android:id="@+id/cubiclinechart"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        app:egCurveSmoothness="0.1"-->
-    <!--        app:egIndicatorLineColor="#FE6DA8"-->
-    <!--        app:egLegendHeight="40dp"-->
-    <!--        app:egShowStandardValue="true"-->
-    <!--        app:egUseCubic="true"-->
-    <!--        app:egUseOverlapFill="true" />-->
-
     <TextView
         android:id="@+id/country_title"
         android:layout_width="match_parent"
@@ -23,18 +12,11 @@
         android:layout_margin="10dp"
         android:textStyle="bold" />
 
-
-<!--    <com.jjoe64.graphview.GraphView-->
-<!--        android:id="@+id/graph"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        android:layout_below="@+id/country_title" />-->
-
     <lecho.lib.hellocharts.view.LineChartView
         android:id="@+id/chart"
-        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/country_title"/>
+        android:layout_below="@+id/country_title"
+        android:layout_margin="10dp" />
 
 </RelativeLayout>

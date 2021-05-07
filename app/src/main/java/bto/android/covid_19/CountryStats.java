@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -13,23 +12,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonArrayRequest;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.series.DataPoint;
-import com.jjoe64.graphview.series.LineGraphSeries;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import lecho.lib.hellocharts.gesture.ZoomType;
 import lecho.lib.hellocharts.listener.LineChartOnValueSelectListener;
 import lecho.lib.hellocharts.model.Axis;
 import lecho.lib.hellocharts.model.Line;
@@ -45,9 +36,6 @@ public class CountryStats extends AppCompatActivity {
     private String countrySlug, countryTextTitle = "";
     private TextView countryTitle;
     private Activity activity;
-
-    //private GraphView graph;
-    //private LineGraphSeries<DataPoint> series;
 
     private LineChartView chart;
 
@@ -67,7 +55,7 @@ public class CountryStats extends AppCompatActivity {
 
         countryTitle = findViewById(R.id.country_title);
         countryTitle.setText("Daily new cases: " + countryTextTitle);
-        //graph = findViewById(R.id.graph);
+
         chart = findViewById(R.id.chart);
         chart.setOnValueTouchListener(new ValueTouchListener());
 
@@ -88,8 +76,6 @@ public class CountryStats extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         //Log.d("INFO", String.valueOf(response.length()));
-
-                        //DataPoint[] dataPoints = new DataPoint[response.length()];
 
                         List<PointValue> values = new ArrayList<PointValue>();
 
@@ -114,7 +100,6 @@ public class CountryStats extends AppCompatActivity {
                                 //}
                                 if (daily > maxY) maxY = daily;
                                 //Log.d("INFO", sdf.format(fmt.parse(date)) + " " + runningTotal + " " + daily);
-                                //dataPoints[i] = new DataPoint(i, daily);
                                 values.add(new PointValue(i, daily));
                             }
 
@@ -140,23 +125,7 @@ public class CountryStats extends AppCompatActivity {
                         data.setAxisXBottom(axisX);
                         data.setAxisYLeft(axisY);
 
-                        //LineChartView chart = new LineChartView(getApplicationContext());
                         chart.setLineChartData(data);
-
-
-//                        series = new LineGraphSeries<DataPoint>(dataPoints);
-//                        series.setDrawBackground(true);
-//                        series.setColor(R.color.graph_blue);
-//                        series.setBackgroundColor(R.color.graph_blue);
-//                        graph.addSeries(series);
-//
-//                        graph.getViewport().setXAxisBoundsManual(true);
-//                        graph.getViewport().setMinX(0);
-//                        graph.getViewport().setMaxX(response.length() * 1.005);
-//
-//                        graph.getViewport().setYAxisBoundsManual(true);
-//                        graph.getViewport().setMinY(0);
-//                        graph.getViewport().setMaxY(maxY * 1.1);
 
                     }
                 },
